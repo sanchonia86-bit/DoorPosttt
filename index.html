@@ -1,0 +1,2514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DoorPost | Direct Rental Platform</title>
+
+<style>
+:root{
+    --green:#123b2a;
+    --green2:#1f7049;
+    --light:#eef7f1;
+    --bg:#f5f7f8;
+    --white:#fff;
+    --text:#17201b;
+    --muted:#6b7280;
+    --border:#dfe5e1;
+    --danger:#c62828;
+    --warning:#a56600;
+    --shadow:0 8px 30px rgba(0,0,0,.08);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+}
+
+button,input,select,textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+.app{
+    min-height:100vh;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    height:70px;
+    background:var(--white);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 5%;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:900;
+    color:var(--green);
+}
+
+.logo span{
+    color:var(--green2);
+}
+
+.nav{
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+.nav button{
+    border:0;
+    background:transparent;
+    padding:10px 13px;
+    color:#47534d;
+    border-radius:8px;
+}
+
+.nav button:hover,
+.nav button.active{
+    background:var(--light);
+    color:var(--green);
+}
+
+.user-menu{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:var(--green);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+/* ================= BUTTONS ================= */
+
+.btn{
+    border:0;
+    padding:11px 16px;
+    border-radius:9px;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.btn-primary{
+    background:var(--green);
+    color:white;
+}
+
+.btn-primary:hover{
+    background:var(--green2);
+}
+
+.btn-light{
+    background:#edf2ef;
+    color:var(--green);
+}
+
+.btn-danger{
+    background:#feecec;
+    color:var(--danger);
+}
+
+.btn-outline{
+    background:white;
+    color:var(--green);
+    border:1px solid var(--green);
+}
+
+.btn-small{
+    padding:8px 11px;
+    font-size:13px;
+}
+
+/* ================= LANDING ================= */
+
+.hero{
+    background:linear-gradient(135deg,#123b2a,#26734c);
+    color:white;
+    padding:70px 7%;
+}
+
+.hero-content{
+    max-width:1150px;
+    margin:auto;
+}
+
+.hero h1{
+    font-size:clamp(34px,5vw,58px);
+    max-width:750px;
+    line-height:1.08;
+}
+
+.hero p{
+    margin-top:18px;
+    max-width:700px;
+    line-height:1.7;
+    font-size:17px;
+    color:#e7f4ec;
+}
+
+.hero-actions{
+    display:flex;
+    gap:10px;
+    margin-top:28px;
+    flex-wrap:wrap;
+}
+
+.hero .btn-light{
+    background:white;
+}
+
+.trust-row{
+    display:flex;
+    gap:12px;
+    margin-top:35px;
+    flex-wrap:wrap;
+}
+
+.trust-item{
+    background:#ffffff18;
+    border:1px solid #ffffff30;
+    padding:10px 14px;
+    border-radius:30px;
+    font-size:13px;
+}
+
+/* ================= SEARCH ================= */
+
+.search-panel{
+    max-width:1150px;
+    margin:-30px auto 35px;
+    background:white;
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    padding:20px;
+    position:relative;
+}
+
+.search-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr auto;
+    gap:10px;
+}
+
+.input{
+    width:100%;
+    padding:12px 13px;
+    border:1px solid var(--border);
+    border-radius:9px;
+    outline:none;
+    background:white;
+}
+
+.input:focus{
+    border-color:var(--green2);
+}
+
+/* ================= CONTENT ================= */
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:35px auto;
+}
+
+.section-heading{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:18px;
+}
+
+.section-heading h2{
+    color:var(--green);
+}
+
+.section-heading p{
+    color:var(--muted);
+    margin-top:5px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+/* ================= PROPERTY CARD ================= */
+
+.property-card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 4px 20px rgba(0,0,0,.06);
+    border:1px solid #e8ece9;
+}
+
+.property-img{
+    height:190px;
+    position:relative;
+    background:linear-gradient(135deg,#a8cbb8,#406b55);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:55px;
+}
+
+.property-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.available{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.reserved{
+    background:#fff3cd;
+    color:#8a5a00;
+}
+
+.rented{
+    background:#f1f1f1;
+    color:#666;
+}
+
+.verified{
+    background:#e5f5eb;
+    color:#17633d;
+}
+
+.img-status{
+    position:absolute;
+    left:12px;
+    top:12px;
+}
+
+.save{
+    position:absolute;
+    right:12px;
+    top:12px;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:0;
+    background:white;
+    font-size:18px;
+}
+
+.card-body{
+    padding:17px;
+}
+
+.card-body h3{
+    margin:8px 0;
+}
+
+.price{
+    font-size:21px;
+    color:var(--green2);
+    font-weight:900;
+}
+
+.location{
+    color:var(--muted);
+    font-size:14px;
+    margin:7px 0;
+}
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin:12px 0;
+}
+
+.tag{
+    background:#eef5f0;
+    color:#286344;
+    padding:5px 8px;
+    border-radius:5px;
+    font-size:11px;
+}
+
+.card-actions{
+    display:flex;
+    gap:7px;
+}
+
+.card-actions .btn{
+    flex:1;
+}
+
+/* ================= DASHBOARD ================= */
+
+.page{
+    padding:35px 5%;
+    max-width:1300px;
+    margin:auto;
+}
+
+.dashboard-cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:white;
+    padding:20px;
+    border-radius:13px;
+    box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.stat small{
+    color:var(--muted);
+}
+
+.stat h2{
+    margin-top:8px;
+    color:var(--green);
+}
+
+.panel{
+    background:white;
+    border-radius:15px;
+    padding:22px;
+    box-shadow:0 4px 18px rgba(0,0,0,.05);
+    margin-bottom:20px;
+}
+
+.panel-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+    gap:10px;
+}
+
+.panel-header h2{
+    color:var(--green);
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    text-align:left;
+    padding:13px 10px;
+    border-bottom:1px solid var(--border);
+    font-size:14px;
+}
+
+th{
+    color:#4b5a52;
+}
+
+/* ================= DETAIL PAGE ================= */
+
+.detail-gallery{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:8px;
+}
+
+.gallery-main,
+.gallery-small{
+    border-radius:12px;
+    background:linear-gradient(135deg,#aacbb8,#52765f);
+    min-height:150px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:28px;
+    overflow:hidden;
+}
+
+.gallery-main img,
+.gallery-small img{
+    width:100%;
+    height:100%;
+    min-height:inherit;
+    object-fit:cover;
+}
+
+.gallery-main{
+    grid-row:span 2;
+    min-height:310px;
+}
+
+.detail-grid{
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:25px;
+}
+
+.info-list{
+    list-style:none;
+}
+
+.info-list li{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:12px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.map{
+    height:280px;
+    border-radius:13px;
+    margin-top:15px;
+    overflow:hidden;
+    background:
+        linear-gradient(25deg,transparent 47%,#a5b9ad 48%,#a5b9ad 52%,transparent 53%),
+        linear-gradient(130deg,transparent 47%,#a5b9ad 48%,#a5b9ad 52%,transparent 53%),
+        #dce9e0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    color:var(--green);
+}
+
+.map iframe{
+    width:100%;
+    height:100%;
+    display:block;
+}
+
+.nearby-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-top:15px;
+}
+
+.nearby{
+    padding:18px;
+    background:#f7faf8;
+    border-radius:10px;
+}
+
+.nearby h4{
+    color:var(--green2);
+    margin-bottom:6px;
+}
+
+/* ================= FORMS ================= */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:6px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+textarea.input{
+    min-height:100px;
+    resize:vertical;
+}
+
+/* ================= CHAT ================= */
+
+.chat-layout{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    min-height:580px;
+}
+
+.chat-list{
+    border-right:1px solid var(--border);
+}
+
+.chat-user{
+    padding:15px;
+    border-bottom:1px solid var(--border);
+    cursor:pointer;
+}
+
+.chat-user:hover,
+.chat-user.active{
+    background:var(--light);
+}
+
+.chat-window{
+    display:flex;
+    flex-direction:column;
+}
+
+.chat-header{
+    padding:17px;
+    border-bottom:1px solid var(--border);
+    font-weight:bold;
+}
+
+.messages{
+    flex:1;
+    padding:20px;
+    background:#f7faf8;
+}
+
+.message{
+    max-width:70%;
+    padding:10px 13px;
+    border-radius:12px;
+    margin-bottom:10px;
+    line-height:1.4;
+}
+
+.message.received{
+    background:white;
+}
+
+.message.sent{
+    background:var(--green);
+    color:white;
+    margin-left:auto;
+}
+
+.chat-input{
+    padding:15px;
+    border-top:1px solid var(--border);
+    display:flex;
+    gap:8px;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:2000;
+    padding:20px;
+}
+
+.modal-box{
+    background:white;
+    width:100%;
+    max-width:550px;
+    max-height:90vh;
+    overflow:auto;
+    border-radius:16px;
+    padding:25px;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close{
+    border:0;
+    background:#eee;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:var(--green);
+    color:white;
+    padding:40px 7%;
+    margin-top:50px;
+}
+
+.footer-grid{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:30px;
+}
+
+footer p,
+footer li{
+    color:#d6e7dd;
+    line-height:1.7;
+    font-size:14px;
+}
+
+footer ul{
+    list-style:none;
+}
+
+/* ================= MOBILE ================= */
+
+.mobile-menu{
+    display:none;
+}
+
+@media(max-width:950px){
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .search-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .dashboard-cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .detail-grid{
+        grid-template-columns:1fr;
+    }
+
+    .nearby-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:650px){
+
+    header{
+        height:auto;
+        padding:12px 4%;
+        flex-wrap:wrap;
+    }
+
+    .nav{
+        display:none;
+        width:100%;
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .nav.show{
+        display:flex;
+    }
+
+    .nav button{
+        text-align:left;
+    }
+
+    .mobile-menu{
+        display:block;
+        border:0;
+        background:#edf2ef;
+        padding:8px 11px;
+        border-radius:7px;
+    }
+
+    .user-menu{
+        margin-left:auto;
+    }
+
+    .hero{
+        padding:50px 6%;
+    }
+
+    .search-panel{
+        margin:15px;
+    }
+
+    .search-grid,
+    .grid,
+    .dashboard-cards,
+    .form-grid,
+    .nearby-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .chat-layout{
+        grid-template-columns:1fr;
+    }
+
+    .chat-list{
+        border-right:0;
+        border-bottom:1px solid var(--border);
+    }
+
+    .detail-gallery{
+        grid-template-columns:1fr;
+    }
+
+    .gallery-main{
+        grid-row:auto;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+    <div class="logo">DoorPost</div>
+
+    <button class="mobile-menu" onclick="toggleMenu()">☰</button>
+
+    <nav class="nav" id="mainNav">
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('properties')">Properties</button>
+        <button onclick="showPage('favorites')">Favorites</button>
+        <button onclick="showPage('messages')">Messages</button>
+        <button onclick="showPage('dashboard')">Dashboard</button>
+        <button onclick="showPage('safety')">Safety</button>
+    </nav>
+
+    <div class="user-menu">
+        <div class="avatar" id="avatar">T</div>
+        <button class="btn btn-light btn-small" onclick="openLogin()">Account</button>
+    </div>
+</header>
+
+
+<!-- ================= HOME ================= -->
+
+<section id="homePage">
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Find a Home. Talk Directly. Rent with Clarity.</h1>
+
+            <p>
+                DoorPost connects tenants directly with landlords.
+                Explore complete property information, compare homes,
+                check neighborhoods and communicate without rental agents.
+            </p>
+
+            <div class="hero-actions">
+                <button class="btn btn-light" onclick="showPage('properties')">
+                    Find a Property
+                </button>
+
+                <button class="btn btn-outline" style="background:#ffffff18;color:white;border-color:#fff"
+                        onclick="showPage('dashboard')">
+                    List My Property
+                </button>
+            </div>
+
+            <div class="trust-row">
+                <div class="trust-item">✓ Verified Landlords</div>
+                <div class="trust-item">✓ Transparent Pricing</div>
+                <div class="trust-item">✓ Direct Chat</div>
+                <div class="trust-item">✓ Updated Availability</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="search-panel">
+
+        <div class="search-grid">
+
+            <input id="homeSearch"
+                   class="input"
+                   placeholder="Search location, house or apartment..."
+                   onkeyup="filterProperties()">
+
+            <select id="homeLocation" class="input" onchange="filterProperties()">
+                <option value="">Location</option>
+                <option>Marikina</option>
+                <option>Pasig</option>
+                <option>Quezon City</option>
+                <option>Mandaluyong</option>
+                <option>Manila</option>
+            </select>
+
+            <select id="homeBudget" class="input" onchange="filterProperties()">
+                <option value="">Budget</option>
+                <option value="10000">Below ₱10,000</option>
+                <option value="15000">Below ₱15,000</option>
+                <option value="20000">Below ₱20,000</option>
+                <option value="30000">Below ₱30,000</option>
+            </select>
+
+            <select id="homeType" class="input" onchange="filterProperties()">
+                <option value="">Property Type</option>
+                <option>Apartment</option>
+                <option>House</option>
+                <option>Condominium</option>
+            </select>
+
+            <button class="btn btn-primary" onclick="showPage('properties')">
+                Search
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="section-heading">
+            <div>
+                <h2>Featured Properties</h2>
+                <p>Updated rental listings from landlords.</p>
+            </div>
+
+            <button class="btn btn-light" onclick="showPage('properties')">
+                View All
+            </button>
+        </div>
+
+        <div class="grid" id="featuredProperties"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PROPERTIES ================= -->
+
+<section id="propertiesPage" class="page hidden">
+
+    <div class="section-heading">
+        <div>
+            <h1>Available Properties</h1>
+            <p>Search and compare homes directly from landlords.</p>
+        </div>
+    </div>
+
+    <div class="panel">
+
+        <div class="search-grid">
+
+            <input id="searchInput"
+                   class="input"
+                   placeholder="Search location or property..."
+                   onkeyup="filterProperties()">
+
+            <select id="locationFilter" class="input" onchange="filterProperties()">
+                <option value="">All Locations</option>
+                <option>Marikina</option>
+                <option>Pasig</option>
+                <option>Quezon City</option>
+                <option>Mandaluyong</option>
+                <option>Manila</option>
+            </select>
+
+            <select id="budgetFilter" class="input" onchange="filterProperties()">
+                <option value="">Any Budget</option>
+                <option value="10000">₱10,000 or less</option>
+                <option value="15000">₱15,000 or less</option>
+                <option value="20000">₱20,000 or less</option>
+                <option value="30000">₱30,000 or less</option>
+            </select>
+
+            <select id="typeFilter" class="input" onchange="filterProperties()">
+                <option value="">Any Type</option>
+                <option>Apartment</option>
+                <option>House</option>
+                <option>Condominium</option>
+            </select>
+
+            <select id="roomFilter" class="input" onchange="filterProperties()">
+                <option value="">Rooms</option>
+                <option value="1">1+</option>
+                <option value="2">2+</option>
+                <option value="3">3+</option>
+            </select>
+
+        </div>
+
+    </div>
+
+    <div class="grid" id="propertyGrid"></div>
+
+</section>
+
+
+<!-- ================= PROPERTY DETAILS ================= -->
+
+<section id="detailsPage" class="page hidden">
+
+    <button class="btn btn-light" onclick="showPage('properties')">
+        ← Back to Properties
+    </button>
+
+    <div id="propertyDetails"></div>
+
+</section>
+
+
+<!-- ================= FAVORITES ================= -->
+
+<section id="favoritesPage" class="page hidden">
+
+    <div class="section-heading">
+        <div>
+            <h1>♡ Favorite Properties</h1>
+            <p>Your saved rental properties.</p>
+        </div>
+    </div>
+
+    <div id="favoritesGrid" class="grid"></div>
+
+</section>
+
+
+<!-- ================= MESSAGES ================= -->
+
+<section id="messagesPage" class="page hidden">
+
+    <div class="section-heading">
+        <div>
+            <h1>Messages</h1>
+            <p>Communicate directly with landlords.</p>
+        </div>
+    </div>
+
+    <div class="panel chat-layout">
+
+        <div class="chat-list">
+
+            <div class="chat-user active">
+                <strong>Sophia Aguilera</strong>
+                <br>
+                <small>Modern Family Apartment</small>
+            </div>
+
+            <div class="chat-user">
+                <strong>Joheira Payong</strong>
+                <br>
+                <small>Bright Studio Apartment</small>
+            </div>
+
+            <div class="chat-user">
+                <strong>Zae Macky Cruz</strong>
+                <br>
+                <small>Two-Story Family House</small>
+            </div>
+
+        </div>
+
+        <div class="chat-window">
+
+            <div class="chat-header">
+                Sophia Aguilera · ✓ Verified Landlord
+            </div>
+
+            <div class="messages" id="messages">
+
+                <div class="message received">
+                    Hello! The apartment is still available.
+                </div>
+
+                <div class="message sent">
+                    Hi! I would like to ask about the viewing schedule.
+                </div>
+
+                <div class="message received">
+                    We can schedule a viewing this weekend.
+                </div>
+
+            </div>
+
+            <div class="chat-input">
+                <input id="messageInput"
+                       class="input"
+                       placeholder="Type a message...">
+
+                <button class="btn btn-primary"
+                        onclick="sendMessage()">
+                    Send
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<section id="dashboardPage" class="page hidden">
+
+    <div class="section-heading">
+        <div>
+            <h1>Dashboard</h1>
+            <p>Manage your rental activity.</p>
+        </div>
+
+        <button class="btn btn-primary" onclick="openAddProperty()">
+            + Add Property
+        </button>
+    </div>
+
+    <div class="dashboard-cards">
+
+        <div class="stat">
+            <small>My Listings</small>
+            <h2>3</h2>
+        </div>
+
+        <div class="stat">
+            <small>Viewing Requests</small>
+            <h2>5</h2>
+        </div>
+
+        <div class="stat">
+            <small>New Messages</small>
+            <h2>8</h2>
+        </div>
+
+        <div class="stat">
+            <small>Saved Properties</small>
+            <h2 id="savedCount">0</h2>
+        </div>
+
+    </div>
+
+
+    <div class="panel">
+
+        <div class="panel-header">
+            <h2>My Properties</h2>
+
+            <button class="btn btn-primary btn-small"
+                    onclick="openAddProperty()">
+                Add Property
+            </button>
+        </div>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Rent</th>
+                        <th>Status</th>
+                        <th>Updated</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                                            <img src="https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/15d86f41-ac48-4341-940b-42782b338011.jfif" alt="img 1">
+                    <tr>
+                        <td>Modern Family Apartment</td>
+                        <td>₱12,000</td>
+                        <td><span class="badge available">AVAILABLE</span></td>
+                        <td>Today</td>
+                        <td>
+                            <button class="btn btn-light btn-small">
+                                Edit
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Bright Studio</td>
+                        <td>₱8,500</td>
+                        <td><span class="badge reserved">RESERVED</span></td>
+                        <td>Yesterday</td>
+                        <td>
+                            <button class="btn btn-light btn-small">
+                                Edit
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Family House</td>
+                        <td>₱22,000</td>
+                        <td><span class="badge available">AVAILABLE</span></td>
+                        <td>2 days ago</td>
+                        <td>
+                            <button class="btn btn-light btn-small">
+                                Edit
+                            </button>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <div class="panel">
+
+        <div class="panel-header">
+            <h2>Viewing Requests</h2>
+        </div>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Tenant</th>
+                        <th>Property</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Alex Reyes</td>
+                        <td>Modern Family Apartment</td>
+                        <td>Sept. 28, 2026</td>
+                        <td>Pending</td>
+                        <td>
+                            <button class="btn btn-primary btn-small">
+                                Accept
+                            </button>
+                            <button class="btn btn-danger btn-small">
+                                Decline
+                            </button>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SAFETY ================= -->
+
+<section id="safetyPage" class="page hidden">
+
+    <div class="section-heading">
+        <div>
+            <h1>Safety & Trust</h1>
+            <p>Important information for safer rental transactions.</p>
+        </div>
+    </div>
+
+    <div class="grid">
+
+        <div class="panel">
+            <h2>✓ Verified Landlords</h2>
+            <p style="margin-top:10px">
+                Look for the verified badge on landlord profiles.
+            </p>
+        </div>
+
+        <div class="panel">
+            <h2>💰 Transparent Pricing</h2>
+            <p style="margin-top:10px">
+                Rental listings should clearly show rent, deposits,
+                utilities and additional fees.
+            </p>
+        </div>
+
+        <div class="panel">
+            <h2>🟢 Availability</h2>
+            <p style="margin-top:10px">
+                Listings should display whether they are available,
+                reserved or rented.
+            </p>
+        </div>
+
+        <div class="panel">
+            <h2>🚩 Report a Listing</h2>
+            <p style="margin-top:10px">
+                Report listings that appear inaccurate or suspicious.
+            </p>
+
+            <button class="btn btn-danger" style="margin-top:15px"
+                    onclick="openReport()">
+                Report Listing
+            </button>
+        </div>
+
+        <div class="panel">
+            <h2>🕒 Last Updated</h2>
+            <p style="margin-top:10px">
+                Check the last updated date before contacting a landlord.
+            </p>
+        </div>
+
+        <div class="panel">
+            <h2>🔐 Personal Information</h2>
+            <p style="margin-top:10px">
+                Avoid sharing sensitive information until you have
+                properly verified the property and landlord.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+            <h2>DoorPost</h2>
+            <p style="margin-top:10px">
+                A direct landlord-to-tenant rental information platform
+                designed to make finding a home clearer and more convenient.
+            </p>
+        </div>
+
+        <div>
+            <h3>Tenants</h3>
+            <ul>
+                <li>Search Properties</li>
+                <li>Save Favorites</li>
+                <li>Compare Homes</li>
+                <li>Chat with Landlords</li>
+                <li>Schedule Viewing</li>
+            </ul>
+        </div>
+
+        <div>
+            <h3>Landlords</h3>
+            <ul>
+                <li>Add Property</li>
+                <li>Manage Listings</li>
+                <li>Messages</li>
+                <li>Viewing Requests</li>
+                <li>Update Availability</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <p style="text-align:center;margin-top:30px">
+        © 2026 DoorPost · Direct Rental Platform
+    </p>
+
+</footer>
+
+
+<!-- ================= MODALS ================= -->
+
+<div class="modal hidden" id="loginModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <h2>DoorPost Account</h2>
+            <button class="close" onclick="closeModal('loginModal')">×</button>
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input class="input" type="email" placeholder="you@example.com">
+        </div>
+
+        <div class="form-group" style="margin-top:15px">
+            <label>Password</label>
+            <input class="input" type="password" placeholder="Password">
+        </div>
+
+        <div class="form-group" style="margin-top:15px">
+            <label>Account Type</label>
+            <select class="input">
+                <option>Tenant</option>
+                <option>Landlord</option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary"
+                style="width:100%;margin-top:20px"
+                onclick="loginDemo()">
+            Login
+        </button>
+
+        <button class="btn btn-light"
+                style="width:100%;margin-top:8px">
+            Create Account
+        </button>
+
+        <p style="text-align:center;margin-top:15px;color:var(--muted)">
+            Forgot your password?
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="modal hidden" id="addPropertyModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <h2>Add Property</h2>
+            <button class="close"
+                    onclick="closeModal('addPropertyModal')">
+                ×
+            </button>
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Property Name</label>
+                <input id="newName"
+                       class="input"
+                       placeholder="Example: Modern Apartment">
+            </div>
+
+            <div class="form-group">
+                <label>Location</label>
+                <input id="newLocation"
+                       class="input"
+                       placeholder="City">
+            </div>
+
+            <div class="form-group">
+                <label>Monthly Rent</label>
+                <input id="newRent"
+                       class="input"
+                       type="number"
+                       placeholder="12000">
+            </div>
+
+            <div class="form-group">
+                <label>Deposit</label>
+                <input class="input"
+                       type="number"
+                       placeholder="24000">
+            </div>
+
+            <div class="form-group">
+                <label>Property Type</label>
+                <select id="newType" class="input">
+                    <option>Apartment</option>
+                    <option>House</option>
+                    <option>Condominium</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Rooms</label>
+                <select id="newRooms" class="input">
+                    <option value="1">1 Room</option>
+                    <option value="2">2 Rooms</option>
+                    <option value="3">3 Rooms</option>
+                    <option value="4">4+ Rooms</option>
+                </select>
+            </div>
+
+            <div class="form-group full">
+                <label>Facilities</label>
+                <input class="input"
+                       placeholder="Wi-Fi, Parking, Kitchen, Security...">
+            </div>
+
+            <div class="form-group full">
+                <label>House Rules</label>
+                <textarea class="input"
+                          placeholder="Enter house rules..."></textarea>
+            </div>
+
+            <div class="form-group full">
+                <label>Tenant Requirements</label>
+                <textarea class="input"
+                          placeholder="Enter tenant requirements..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Property Photos</label>
+                <input class="input" type="file" accept="image/*" multiple>
+            </div>
+
+            <div class="form-group">
+                <label>Video Tour</label>
+                <input class="input" type="file" accept="video/*">
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary"
+                style="width:100%;margin-top:20px"
+                onclick="addProperty()">
+            Publish Property
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="modal hidden" id="viewingModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <h2>Schedule Viewing</h2>
+            <button class="close"
+                    onclick="closeModal('viewingModal')">
+                ×
+            </button>
+        </div>
+
+        <p id="viewingProperty"
+           style="margin-bottom:20px;color:var(--muted)">
+        </p>
+
+        <div class="form-group">
+            <label>Preferred Date</label>
+            <input id="viewDate" class="input" type="date">
+        </div>
+
+        <div class="form-group" style="margin-top:15px">
+            <label>Preferred Time</label>
+            <input id="viewTime" class="input" type="time">
+        </div>
+
+        <div class="form-group" style="margin-top:15px">
+            <label>Message to Landlord</label>
+            <textarea class="input"
+                      placeholder="Introduce yourself or ask a question..."></textarea>
+        </div>
+
+        <button class="btn btn-primary"
+                style="width:100%;margin-top:20px"
+                onclick="submitViewing()">
+            Request Viewing
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="modal hidden" id="reportModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <h2>Report Listing</h2>
+            <button class="close"
+                    onclick="closeModal('reportModal')">
+                ×
+            </button>
+        </div>
+
+        <label>Reason</label>
+
+        <select class="input" style="margin-top:7px">
+            <option>Incorrect information</option>
+            <option>Suspicious listing</option>
+            <option>Fake property</option>
+            <option>Incorrect rental price</option>
+            <option>Other</option>
+        </select>
+
+        <textarea class="input"
+                  style="margin-top:15px"
+                  placeholder="Describe the problem..."></textarea>
+
+        <button class="btn btn-danger"
+                style="width:100%;margin-top:15px"
+                onclick="submitReport()">
+            Submit Report
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="modal hidden" id="notificationModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <h2>Notifications</h2>
+            <button class="close"
+                    onclick="closeModal('notificationModal')">
+                ×
+            </button>
+        </div>
+
+        <div class="panel">
+            🔔 A property matching your search was added.
+        </div>
+
+        <div class="panel">
+            💬 Juan Dela Cruz replied to your inquiry.
+        </div>
+
+        <div class="panel">
+            📅 Your viewing request is awaiting confirmation.
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ================= DATA ================= */
+
+let properties = [
+
+{
+    id:1,
+    name:"Modern Family Apartment",
+    image:"https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/15d86f41-ac48-4341-940b-42782b338011.jfif",
+    images:[
+        "https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/15d86f41-ac48-4341-940b-42782b338011.jfif",
+        "https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/ab82b97c-22b8-48c4-8a99-b4b6504a0ec4.jfif",
+        "https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/f0c71532-a5fb-4681-829a-ffceaa2b4780.jfif"
+    ],
+    location:"Marikina",
+    rent:12000,
+    deposit:24000,
+    type:"Apartment",
+    rooms:2,
+    status:"Available",
+    verified:true,
+    facilities:["Wi-Fi","Parking","Kitchen","Security"],
+    utilities:"Water included; electricity not included",
+    description:"A clean and comfortable two-bedroom apartment suitable for a small family or working tenants.",
+    landlord:"Sophia Aguilera",
+    updated:"Today"
+},
+
+{
+    id:2,
+    name:"Bright Studio Apartment",
+    image:"https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/fc9dc804-8105-4c09-9d45-d76a8342a8ea.jpg",
+    images:[
+        "https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/fc9dc804-8105-4c09-9d45-d76a8342a8ea.jpg",
+        "https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/acb1f9c4-ef36-460c-b520-2bfd780f444f.jpg",
+        "https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/a31d3246-a01f-4d1b-b38f-6826a9d3499a.jpg"
+    ],
+    location:"Pasig",
+    rent:8500,
+    deposit:17000,
+    type:"Apartment",
+    rooms:1,
+    status:"Available",
+    verified:true,
+    facilities:["Wi-Fi","Security","Kitchen"],
+    utilities:"Water not included; electricity not included",
+    description:"A compact studio apartment close to stores and transportation.",
+    landlord:"Joheira Payong",
+    updated:"Yesterday"
+},
+
+{
+    id:3,
+    name:"Two-Story Family House",
+    image:"https://uploads.onecompiler.io/44t5cwbvt/1790782557904/1000046486.jpg",
+    images:[
+        "https://uploads.onecompiler.io/44t5cwbvt/1790782557904/1000046486.jpg",
+        "https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/aebec750-f1fd-4a90-a12f-a34cf74f459a.jpg",
+        "https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/efeb66d2-f44b-4ec2-a8ac-b51bb566d4a0.jpg"
+    ],
+    location:"Quezon City",
+    rent:22000,
+    deposit:44000,
+    type:"House",
+    rooms:3,
+    status:"Available",
+    verified:true,
+    facilities:["Garage","Kitchen","Pet Friendly","Security"],
+    utilities:"Utilities not included",
+    description:"A spacious three-bedroom family house with parking and a private living area.",
+    landlord:"Zae Macky Cruz",
+    updated:"2 days ago"
+},
+
+{
+    id:4,
+    name:"City View Condominium",
+    image:"https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/732a50b3-c9d1-47f2-879c-820dcff07ec3.jpg",
+    images:[
+        "https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/732a50b3-c9d1-47f2-879c-820dcff07ec3.jpg",
+        "https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/218c63a5-7e57-4843-be20-dc585e191e39.jpg",
+        "https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/12ed165c-9989-47a3-a769-3da1a7593478.jpg"
+    ],
+    location:"Mandaluyong",
+    rent:18000,
+    deposit:36000,
+    type:"Condominium",
+    rooms:1,
+    status:"Reserved",
+    verified:true,
+    facilities:["Pool","Gym","Security","Parking"],
+    utilities:"Water included; electricity not included",
+    description:"A modern condominium unit with building amenities.",
+    landlord:"Angela Cruz",
+    updated:"Today"
+},
+
+{
+    id:5,
+    name:"Affordable Family Home",
+    image:"https://uploads.onecompiler.io/44t5cwbvt/1790782563905/1000046485.jpg",
+    images:[
+        "https://uploads.onecompiler.io/44t5cwbvt/1790782563905/1000046485.jpg",
+        "https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/2d187526-507d-4157-8ea3-4594d04dbaf3.jpg",
+        "https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/b71bb6c9-a35d-4614-86f6-642f1414a4f5.jpg"
+    ],
+    location:"Manila",
+    rent:10000,
+    deposit:20000,
+    type:"House",
+    rooms:2,
+    status:"Available",
+    verified:true,
+    facilities:["Kitchen","Parking","Water"],
+    utilities:"Water included",
+    description:"Affordable two-bedroom home in a residential neighborhood.",
+    landlord:"David Reyes",
+    updated:"3 days ago"
+},
+
+{
+    id:6,
+    name:"Large Family Residence",
+    image:"https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/1000046460.jpg",
+    images:[
+        "https://uploads.onecompiler.io/44t5cwbvt/4546m6xv9/1000046460.jpg",
+        "https://uploads.onecompiler.io/4547ghu73/1790251531964/1000046462.jpg",
+        "https://uploads.onecompiler.io/4547ghu73/1790251527696/1000046461.jpg"
+    ],
+    location:"Marikina",
+    rent:28000,
+    deposit:56000,
+    type:"House",
+    rooms:4,
+    status:"Rented",
+    verified:true,
+    facilities:["Garage","Garden","Kitchen","Security"],
+    utilities:"Utilities not included",
+    description:"Large family residence with four rooms and a spacious outdoor area.",
+    landlord:"Elena Garcia",
+    updated:"1 week ago"
+}
+
+];
+
+let favorites = [];
+let compareList = [];
+
+
+/* ================= NAVIGATION ================= */
+
+function showPage(page){
+
+    const pages = [
+        "homePage",
+        "propertiesPage",
+        "detailsPage",
+        "favoritesPage",
+        "messagesPage",
+        "dashboardPage",
+        "safetyPage"
+    ];
+
+    pages.forEach(id=>{
+        document.getElementById(id).classList.add("hidden");
+    });
+
+    document.getElementById(page+"Page").classList.remove("hidden");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+    if(page==="properties"){
+        renderProperties();
+    }
+
+    if(page==="favorites"){
+        renderFavorites();
+    }
+
+    if(page==="home"){
+        renderFeatured();
+    }
+
+    if(page==="dashboard"){
+        updateSavedCount();
+    }
+}
+
+
+/* ================= PROPERTY CARDS ================= */
+
+function propertyCard(p){
+
+    let statusClass =
+        p.status==="Available" ? "available" :
+        p.status==="Reserved" ? "reserved" : "rented";
+
+    let isSaved=favorites.includes(p.id);
+
+    return `
+
+    <div class="property-card">
+
+        <div class="property-img">
+
+            <span class="badge ${statusClass} img-status">
+                ${p.status.toUpperCase()}
+            </span>
+
+            <button class="save"
+                    onclick="toggleFavorite(${p.id})">
+                ${isSaved ? "♥" : "♡"}
+            </button>
+
+            ${p.image
+                ? `<img src="${p.image}" alt="${p.name}">`
+                : "🏠"
+            }
+
+        </div>
+
+        <div class="card-body">
+
+            <span class="badge verified">
+                ✓ VERIFIED LANDLORD
+            </span>
+
+            <h3>${p.name}</h3>
+
+            <div class="price">
+                ₱${p.rent.toLocaleString()} / month
+            </div>
+
+            <div class="location">
+                📍 ${p.location}
+            </div>
+
+            <div class="tags">
+
+                <span class="tag">
+                    🛏 ${p.rooms} Room${p.rooms>1?"s":""}
+                </span>
+
+                <span class="tag">
+                    ${p.type}
+                </span>
+
+                ${p.facilities.slice(0,2).map(f=>
+                    `<span class="tag">${f}</span>`
+                ).join("")}
+
+            </div>
+
+            <small style="color:var(--muted)">
+                Updated ${p.updated}
+            </small>
+
+            <div class="card-actions" style="margin-top:12px">
+
+                <button class="btn btn-primary"
+                        onclick="viewProperty(${p.id})">
+                    View Details
+                </button>
+
+                <button class="btn btn-light"
+                        onclick="addCompare(${p.id})">
+                    Compare
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    `;
+}
+
+
+/* ================= RENDER ================= */
+
+function renderFeatured(){
+
+    document.getElementById("featuredProperties").innerHTML =
+        properties.slice(0,3).map(propertyCard).join("");
+
+}
+
+function renderProperties(list=properties){
+
+    document.getElementById("propertyGrid").innerHTML =
+        list.length
+        ? list.map(propertyCard).join("")
+        : `
+        <div class="panel" style="grid-column:1/-1;text-align:center">
+            <h2>No matching properties</h2>
+            <p style="margin-top:8px;color:var(--muted)">
+                Try changing your search filters.
+            </p>
+        </div>
+        `;
+
+}
+
+
+/* ================= SEARCH ================= */
+
+function filterProperties(){
+
+    let search =
+        document.getElementById("searchInput")?.value.toLowerCase() ||
+        document.getElementById("homeSearch")?.value.toLowerCase() ||
+        "";
+
+    let location =
+        document.getElementById("locationFilter")?.value ||
+        document.getElementById("homeLocation")?.value ||
+        "";
+
+    let budget =
+        document.getElementById("budgetFilter")?.value ||
+        document.getElementById("homeBudget")?.value ||
+        "";
+
+    let type =
+        document.getElementById("typeFilter")?.value ||
+        document.getElementById("homeType")?.value ||
+        "";
+
+    let rooms =
+        document.getElementById("roomFilter")?.value || "";
+
+    let result=properties.filter(p=>{
+
+        let matchSearch =
+            !search ||
+            p.name.toLowerCase().includes(search) ||
+            p.location.toLowerCase().includes(search);
+
+        let matchLocation =
+            !location || p.location===location;
+
+        let matchBudget =
+            !budget || p.rent<=Number(budget);
+
+        let matchType =
+            !type || p.type===type;
+
+        let matchRooms =
+            !rooms || p.rooms>=Number(rooms);
+
+        return matchSearch &&
+               matchLocation &&
+               matchBudget &&
+               matchType &&
+               matchRooms;
+    });
+
+    if(document.getElementById("propertiesPage").classList.contains("hidden")===false){
+        renderProperties(result);
+    }
+}
+
+
+/* ================= PROPERTY DETAILS ================= */
+
+function viewProperty(id){
+
+    let p=properties.find(x=>x.id===id);
+
+    if(!p)return;
+
+    document.getElementById("propertyDetails").innerHTML=`
+
+        <div class="panel" style="margin-top:20px">
+
+            <div class="detail-grid">
+
+                <div>
+
+                    <div class="detail-gallery">
+
+                        <div class="gallery-main">
+                            ${p.images?.[0]
+                                ? `<img src="${p.images[0]}" alt="${p.name} main photo">`
+                                : "🏠 PROPERTY PHOTO"
+                            }
+                        </div>
+
+                        <div class="gallery-small">
+                            ${p.images?.[1]
+                                ? `<img src="${p.images[1]}" alt="${p.name} second photo">`
+                                : "📷 PHOTO"
+                            }
+                        </div>
+
+                        <div class="gallery-small">
+                            ${p.images?.[2]
+                                ? `<img src="${p.images[2]}" alt="${p.name} third photo">`
+                                : "📷 PHOTO"
+                            }
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <span class="badge ${
+                        p.status==="Available"?"available":
+                        p.status==="Reserved"?"reserved":"rented"
+                    }">
+                        ${p.status.toUpperCase()}
+                    </span>
+
+                    <h1 style="margin:12px 0">
+                        ${p.name}
+                    </h1>
+
+                    <div class="price">
+                        ₱${p.rent.toLocaleString()} / month
+                    </div>
+
+                    <p class="location">
+                        📍 ${p.location}
+                    </p>
+
+                    <div class="tags">
+
+                        ${p.facilities.map(f=>
+                            `<span class="tag">${f}</span>`
+                        ).join("")}
+
+                    </div>
+
+                    <ul class="info-list">
+
+                        <li>
+                            <span>Property Type</span>
+                            <strong>${p.type}</strong>
+                        </li>
+
+                        <li>
+                            <span>Rooms</span>
+                            <strong>${p.rooms}</strong>
+                        </li>
+
+                        <li>
+                            <span>Deposit</span>
+                            <strong>₱${p.deposit.toLocaleString()}</strong>
+                        </li>
+
+                        <li>
+                            <span>Other Fees</span>
+                            <strong>See landlord terms</strong>
+                        </li>
+
+                        <li>
+                            <span>Utilities</span>
+                            <strong>${p.utilities}</strong>
+                        </li>
+
+                        <li>
+                            <span>Availability</span>
+                            <strong>${p.status}</strong>
+                        </li>
+
+                        <li>
+                            <span>Last Updated</span>
+                            <strong>${p.updated}</strong>
+                        </li>
+
+                    </ul>
+
+                    <div style="display:flex;gap:8px;margin-top:18px">
+
+                        <button class="btn btn-primary"
+                                onclick="openViewing('${p.name}')">
+                            📅 Schedule Viewing
+                        </button>
+
+                        <button class="btn btn-light"
+                                onclick="showPage('messages')">
+                            💬 Chat
+                        </button>
+
+                        <button class="btn btn-danger"
+                                onclick="openReport()">
+                            🚩
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div style="margin-top:30px">
+
+                <h2>Description</h2>
+
+                <p style="line-height:1.7;margin-top:10px">
+                    ${p.description}
+                </p>
+
+            </div>
+
+
+            <div style="margin-top:30px">
+
+                <h2>House Rules</h2>
+
+                <ul style="line-height:1.9;margin:10px 0 0 20px">
+
+                    <li>No smoking inside the property.</li>
+                    <li>Keep shared areas clean.</li>
+                    <li>Observe quiet hours.</li>
+                    <li>Follow compound regulations.</li>
+
+                </ul>
+
+            </div>
+
+
+            <div style="margin-top:30px">
+
+                <h2>Tenant Requirements</h2>
+
+                <ul style="line-height:1.9;margin:10px 0 0 20px">
+
+                    <li>Valid identification.</li>
+                    <li>Proof of income or employment.</li>
+                    <li>Emergency contact.</li>
+                    <li>Signed rental agreement.</li>
+
+                </ul>
+
+            </div>
+
+
+            <div style="margin-top:30px">
+
+                <h2>Location & Neighborhood</h2>
+
+                <div class="map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3860.3080422242383!2d121.09594407492476!3d14.638447385852421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b9cbc7e64541%3A0x934cf0e3b36af7b4!2sNclc%20Grade%20School!5e0!3m2!1sen!2sph!4v1790248386466!5m2!1sen!2sph"
+                        width="400"
+                        height="300"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="strict-origin-when-cross-origin">
+                    </iframe>
+                </div>
+
+                <div class="nearby-grid">
+
+                    <div class="nearby">
+                        <h4>🏫 Schools</h4>
+                        <p>Nearby schools and educational institutions.</p>
+                    </div>
+
+                    <div class="nearby">
+                        <h4>🛒 Stores</h4>
+                        <p>Markets and convenience stores nearby.</p>
+                    </div>
+
+                    <div class="nearby">
+                        <h4>🚌 Transport</h4>
+                        <p>Nearby public transportation options.</p>
+                    </div>
+
+                    <div class="nearby">
+                        <h4>🏥 Hospitals</h4>
+                        <p>Nearby hospitals and clinics.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div style="margin-top:30px">
+
+                <h2>Landlord</h2>
+
+                <div style="
+                    display:flex;
+                    align-items:center;
+                    gap:15px;
+                    background:#f5f8f6;
+                    padding:18px;
+                    border-radius:12px;
+                    margin-top:12px">
+
+                    <div class="avatar">
+                        ${p.landlord.charAt(0)}
+                    </div>
+
+                    <div style="flex:1">
+
+                        <h3>${p.landlord}</h3>
+
+                        <span class="verified">
+                            ✓ VERIFIED LANDLORD
+                        </span>
+
+                        <p style="margin-top:5px;color:var(--muted)">
+                            Property owner · Direct communication
+                        </p>
+
+                    </div>
+
+                    <button class="btn btn-primary"
+                            onclick="showPage('messages')">
+                        💬 Chat
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+    showPage("details");
+
+}
+
+
+/* ================= FAVORITES ================= */
+
+function toggleFavorite(id){
+
+    if(favorites.includes(id)){
+        favorites=favorites.filter(x=>x!==id);
+    }else{
+        favorites.push(id);
+    }
+
+    renderFeatured();
+    renderProperties();
+    renderFavorites();
+    updateSavedCount();
+
+}
+
+function renderFavorites(){
+
+    let list=properties.filter(p=>favorites.includes(p.id));
+
+    document.getElementById("favoritesGrid").innerHTML=
+        list.length
+        ? list.map(propertyCard).join("")
+        : `
+        <div class="panel" style="grid-column:1/-1;text-align:center">
+            <h2>No saved properties yet</h2>
+            <p style="margin-top:8px;color:var(--muted)">
+                Tap ♡ on a property to save it.
+            </p>
+        </div>
+        `;
+
+}
+
+function updateSavedCount(){
+
+    document.getElementById("savedCount").textContent=favorites.length;
+
+}
+
+
+/* ================= COMPARE ================= */
+
+function addCompare(id){
+
+    if(!compareList.includes(id)){
+        compareList.push(id);
+    }
+
+    if(compareList.length>3){
+        compareList.shift();
+    }
+
+    alert(
+        "Property added to comparison.\n\n" +
+        "Selected properties: "+compareList.length
+    );
+
+}
+
+
+/* ================= VIEWING ================= */
+
+function openViewing(name){
+
+    document.getElementById("viewingProperty").textContent =
+        "Requesting a viewing for: "+name;
+
+    document.getElementById("viewingModal").classList.remove("hidden");
+
+}
+
+function submitViewing(){
+
+    closeModal("viewingModal");
+
+    alert(
+        "Viewing request submitted!\n\n" +
+        "The landlord will receive your request."
+    );
+
+}
+
+
+/* ================= ADD PROPERTY ================= */
+
+function openAddProperty(){
+
+    document.getElementById("addPropertyModal").classList.remove("hidden");
+
+}
+
+function addProperty(){
+
+    let name=document.getElementById("newName").value || "New Property";
+    let location=document.getElementById("newLocation").value || "Metro Manila";
+    let rent=Number(document.getElementById("newRent").value) || 10000;
+    let type=document.getElementById("newType").value;
+    let rooms=Number(document.getElementById("newRooms").value);
+
+    properties.unshift({
+
+        id:Date.now(),
+        name,
+        location,
+        rent,
+        deposit:rent*2,
+        type,
+        rooms,
+        status:"Available",
+        verified:false,
+        facilities:["New Listing"],
+        utilities:"To be discussed",
+        description:"New property listing added by the landlord.",
+        landlord:"You",
+        updated:"Just now"
+
+    });
+
+    closeModal("addPropertyModal");
+
+    renderProperties();
+    renderFeatured();
+
+    alert(
+        "Property successfully added to your dashboard!"
+    );
+
+}
+
+
+/* ================= CHAT ================= */
+
+function sendMessage(){
+
+    let input=document.getElementById("messageInput");
+    let text=input.value.trim();
+
+    if(!text)return;
+
+    let messages=document.getElementById("messages");
+
+    messages.innerHTML+=`
+        <div class="message sent">
+            ${escapeHTML(text)}
+        </div>
+    `;
+
+    input.value="";
+
+    setTimeout(()=>{
+
+        messages.innerHTML+=`
+            <div class="message received">
+                Thank you for your message. The landlord will respond shortly.
+            </div>
+        `;
+
+        messages.scrollTop=messages.scrollHeight;
+
+    },700);
+
+}
+
+function escapeHTML(text){
+
+    let div=document.createElement("div");
+    div.textContent=text;
+    return div.innerHTML;
+
+}
+
+
+/* ================= REPORT ================= */
+
+function openReport(){
+
+    document.getElementById("reportModal").classList.remove("hidden");
+
+}
+
+function submitReport(){
+
+    closeModal("reportModal");
+
+    alert(
+        "Thank you. Your report has been submitted for review."
+    );
+
+}
+
+
+/* ================= LOGIN ================= */
+
+function openLogin(){
+
+    document.getElementById("loginModal").classList.remove("hidden");
+
+}
+
+function loginDemo(){
+
+    closeModal("loginModal");
+
+    document.getElementById("avatar").textContent="U";
+
+    alert(
+        "Demo login successful!\n\n" +
+        "Welcome to DoorPost."
+    );
+
+}
+
+
+/* ================= MODALS ================= */
+
+function closeModal(id){
+
+    document.getElementById(id).classList.add("hidden");
+
+}
+
+
+/* ================= MOBILE MENU ================= */
+
+function toggleMenu(){
+
+    document.getElementById("mainNav").classList.toggle("show");
+
+}
+
+
+/* ================= INITIAL LOAD ================= */
+
+renderFeatured();
+renderProperties();
+updateSavedCount();
+
+</script>
+
+</body>
+</html>
